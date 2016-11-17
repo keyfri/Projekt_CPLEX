@@ -1,0 +1,22 @@
+/*********************************************
+ * OPL 12.6.3.0 Data
+ * Author: Patryk
+ * Creation Date: 17-11-2016 at 10:36:43
+ *********************************************/
+
+ P=1..h /* set of flows */
+ N=1..n /* set of virtual security appliances */
+ Sp /* source */
+ Dp /* destination */
+ 
+  /* positive integer representing the cost of traveling between two nodes i and j */
+ c=[[0 1 0 0 3 0][1 0 1 2 0 0][0 1 0 1 0 3][0 2 1 0 1 2][3 0 0 1 0 2][0 0 3 2 2 0]]
+ 
+ b /* positive integer representing the cost of purchasing a VSA l at market i */
+ d /* demand of a product l required by the purchaser p */
+ q /* quantity of product l initially available at market i */
+ 
+ K=[[1 2 3 4][2 4 1 3]] /* set of VSAs that must be purchased for the flow p */
+ O=[[1 3][2 1][3 4][4 2]] /* positive integer that represents the order of purchasing a product */
+ S=[1 2]
+ D=[5 6]
