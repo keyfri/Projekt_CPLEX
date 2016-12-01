@@ -105,23 +105,42 @@ Purchaser Purchasers[1..p]=[
 							
 							
 
-dvar int+ x[edges];  // 0 lub 1 - ide albo nie ide
+dvar int x[edges][1..p];  // 0 lub 1 - ide albo nie ide
 //dvar int+ x[N];
 //dvar int V [ i ] [ j ][ P ];
 
 
 
 minimize
-sum(edge in edges) x[edge]*Edges[edge].cost; // + sum(market in N) y[market]*quantity*buy MarketContent[market];
+sum(edge in edges) x[edge][p]*Edges[edge].cost; // + sum(market in N) y[market]*quantity*buy MarketContent[market];
 
 
 subject to
 {
- 
+
+forall (e in edges,p in 1..p){
+(x[e][p] <= 0 && x[e][p] >= 0) ||
+(x[e][p] <= 1 && x[e][p] >= 1);
+}
+
+forall (path in 1..p){
+forall (e in edges){
+if (
+Purchasers[path].source==Edges[e].source 
+||
+Edges[e].destination==Purchasers[path].destination
+
+)
+x[e][p] >= 1;
+}
+}
+
+ /*
   sum(edge in edges: Edges[edge].source == Purchasers[1].source) (x[edge]) - sum(edge in edges: Edges[edge].destination == Purchasers[1].destination) (x[edge]) == m-1;
 	
 	forall(node in 2..m){
 		suma: sum(edge in edges: Edges[edge].source == Markets[node]) (x[edge]) - sum(edge in edges: Edges[edge].destination == Markets[node]) (x[edge]) == -1;
 }
+*/
 }
 
