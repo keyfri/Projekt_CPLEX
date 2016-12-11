@@ -13,72 +13,57 @@ range N = 1..m;
 range P = 1..p;
 range edges = 1..16;
 
-tuple Market{
-	int number;
-	string name;
-	// Contents content;
-}
+string markets[N] = ["M1", "M2", "M3", "M4", "M5", "M6", "M7"];
+string products[P] = ["A", "B", "C", "D"];
 
 tuple Edge {
   int id;
-	Market source;
-	Market destination;
+	string source;
+	string destination;
 	int cost;  // c
 }
 
 
-tuple Product{  // l
-	int id;
-	string name;
-}
-
 
 tuple KDO{
-	Product pr;  // K
+	string pr;  // K
 	int amount;	 // D
 	int order;   // O
 }
 
 tuple Purchaser {  // kupiec
   int id;
-	Market source;
-	Market destination;
+	string source;
+	string destination;
 	// KDOs shopping_list;
 }
 
 tuple Content {  // ilosc danego produktu w markecie i koszt jego pobrania
-	Product pr;   // l
+	string pr;   // l
 	int buy;   // B
 	int quantity;	 // Q
 
 }
 
-tuple MarketContent {  // wartosci dla danego marketu
-	Content content;
-}
-
-Market Markets[N] = [<1, "M1">, <2, "M2">, <3, "M3">, <4, "M4">, <5, "M5">, <6, "M6">, <7, "M7">]; // do Marktetow trzeba dorzucic co tam mozna kupic = MarketContent
+Content MarketContents[P] = [<"A", 5, 5>, <"B", 5, 5>, <"C", 5, 5>, <"D", 5, 5>];
 
 Edge Edges[edges] = [
-					<12, Markets[1], Markets[2], 2>,
-					<21, Markets[2], Markets[1], 2>,
-					<25, Markets[2], Markets[5], 2>,
-					<52, Markets[5], Markets[2], 2>,
-					<35, Markets[3], Markets[5], 4>,
-					<53, Markets[5], Markets[3], 4>,					
-					<13, Markets[1], Markets[3], 3>,
-					<31, Markets[3], Markets[1], 3>,
-					<14, Markets[1], Markets[4], 3>,
-					<41, Markets[4], Markets[1], 3>,
-					<46, Markets[4], Markets[6], 4>,
-					<64, Markets[6], Markets[4], 4>,
-					<67, Markets[6], Markets[7], 2>,
-					<76, Markets[7], Markets[6], 2>,
-					<75, Markets[7], Markets[5], 2>,
-					<57, Markets[5], Markets[7], 2>];
-
-
-Product Products[1..l] = [<1, "A">, <2, "B">, <3, "C">, <4, "D">];
+					<12, "M1", "M2", 2>,
+					<21, "M2", "M1", 2>,
+					<25, "M2", "M5", 2>,
+					<52, "M5", "M2", 2>,
+					<35, "M3", "M5", 4>,
+					<53, "M5", "M3", 4>,					
+					<13, "M1", "M3", 3>,
+					<31, "M3", "M1", 3>,
+					<14, "M1", "M4", 3>,
+					<41, "M4", "M1", 3>,
+					<46, "M4", "M6", 4>,
+					<64, "M6", "M4", 4>,
+					<67, "M6", "M7", 2>,
+					<76, "M7", "M6", 2>,
+					<75, "M7", "M5", 2>,
+					<57, "M5", "M7", 2>];
 
 /*						
 Contents MarketContent[N]=[
@@ -100,8 +85,8 @@ KDO KDOs[1..p]=
 */
 		
 Purchaser Purchasers[1..p]=[
-							<1, Markets[1],Markets[5]>, // +KDO
-							<2, Markets[2],Markets[6]>];
+							<1, "M1","M5">, // +KDO
+							<2, "M2","M6">];
 							
 							
 
