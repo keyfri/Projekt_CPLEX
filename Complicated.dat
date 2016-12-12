@@ -1,0 +1,99 @@
+/*********************************************
+ * OPL 12.6.3.0 Data
+ * Author: Patryk
+ * Creation Date: 17-11-2016 at 10:36:43
+ *********************************************/
+
+m = 7;
+p = 2;
+n = 4;
+
+S_set = {1, 2};
+S = [1, 2];
+
+D_set = {5,6};
+D = [5, 6];
+
+costs = [
+	[0, 2, 3, 3, 0, 0, 0],
+	[2, 0, 0, 0, 2, 0, 0],
+	[3, 0, 0, 0, 4, 0, 0],
+	[3, 0, 0, 0, 0, 4, 0],
+	[0, 2, 4, 0, 0, 0, 2],
+	[0, 0, 0, 4, 0, 0, 2],
+	[0, 0, 0, 0, 2, 2, 0]
+];
+
+cost_of_purchasing = [
+	[2, 4, 0, 0],
+	[0, 2, 2, 3],
+	[1, 0, 2, 0],
+	[0, 0, 2, 2],
+	[2, 2, 3, 3],
+	[0, 0, 1, 2],
+	[3, 0, 0, 1]
+];
+
+demands = [
+	[3, 4],
+	[3, 4],
+	[3, 5],
+	[5, 0]
+];
+
+q = [
+	[5, 5, 0, 0],
+	[0, 5, 5, 2],
+	[2, 0, 5, 0],
+	[0, 0, 2, 2],
+	[2, 2, 2, 2],
+	[0, 0, 2, 2],
+	[5, 0, 0, 2]
+];
+
+K = [
+	{1, 2, 3, 4},
+	{1, 2, 3}
+];
+
+O = [
+	[1, 2],
+	[2, 1],
+	[3, 5],
+	[4, 0]
+];
+
+/* MODEL:   [slowa przeplyw i kupiec to dla mnie to samo]
+M - markety
+P - zbior przeplywow 
+N - zbior produktow ktore mozna zakupic u roznych nodow
+S(p) - source
+D(p) - destination
+i/j nr nodow, naleza do M
+c(i,j) - koszt podrozy pomiedzy linkami  i , j 
+l - produkt; nalezy do N
+b(i,l) -  koszt zakupu produktu VSA l at market i
+
+d(l,p) - zapotrzebowanie na produkt l przez kupca p (ilosc) 
+q(i,l) - ilosc produktu l poczatkowo dostepna at market i 
+K(p) -  zbior VSAs ktory musi byc zakupiony przez flow p [np {A,C,D}]
+O(l,p) - kolejnosc of zakupu produktu
+
+
+Zmienne ktorymi mozemy manipulowac:
+x(i,j,p) - jak 1 to dany przeplyw p idzie tym linkiem [0 lub 1]
+y(i,l,p) - jak 1 to dany przeplyw p kupil produkt l w markecie i  [0 lub 1]
+v(i,j,p) - kolejnosc linkow dla przeplywu p
+
+Ograniczenia:
+(2) - suma wchodzacych i wychodzacych sciezek jest taka sama, chyba ze S i P- wtedy 1
+(3) - suma zebranych produktow l dla przeplywu p musi wynosic d
+(4) - ilosc zakupionych produktow w danym markecie musi byc mniejsza niz q
+(5) - market musi zostac odwiedzony aby produkt mogl zostac pobrany
+(6) - zapobiega petlom
+(7) - ?
+(8) - zdefiniowany sposob obliczania v  ?
+(9) - produkty nalezy kupowac w kolejnosci
+*/
+
+ 

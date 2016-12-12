@@ -2,11 +2,11 @@
 	<version>1.0</version>
 	<configs>
 		<config category="opl" default="true" name="Konfiguracja1">
-			<ref name="Projekt.mod" type="model">
-			</ref>
 			<ref name="Projekt.ops" type="setting">
 			</ref>
 			<ref name="Projekt.dat" type="data">
+			</ref>
+			<ref name="Projekt.mod" type="model">
 			</ref>
 		</config>
 	</configs>

@@ -43,8 +43,10 @@ minimize
 subject to
 {
 	// 2 ???
-	sum(j in M, i in M, p in P)(x[j][i][p]) + sum(j in M, i in M, p in P: i == S[p])(1) == 
-	sum(i in M, r in M, p in P)(x[i][r][p]) + sum(i in M, r in M, p in P: i == D[p])(1);
+	forall(i in M, p in P){
+		con2: sum(j in M)(x[j][i][p]) + sum(a in {1}: i == S[p])(1) == 
+		sum(r in M : r not in S_set && r not in D_set)(x[i][r][p]) + sum(a in {1}: i == D[p])(1);
+	}	
 	
 	// 3
 	forall(l in N, p in P){
