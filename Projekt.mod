@@ -79,8 +79,8 @@ subject to
     }
 //    
 //    // 9
-    forall(p in P, i in M, j in M: j not in D_set[p] && i != j, l in K[p], k in K[p] : l != k && O[l][p] == O[k][p] - 1){
-    	m*sum(a in M)(x[a][i][p] - y[i][k][p]) - sum(r in M)(v[r][i][p]) + m >= m*y[j][l][p] - sum(r in M)(v[r][j][p]);    
+    forall(p in P, i in M, j in M: j not in D_set[p] && i not in D_set[p] && i != j, l in K[p], k in K[p] : l != k && O[l][p] == O[k][p] - 1){
+    	m*(sum(a in M)(x[a][i][p]) - y[i][k][p]) - sum(r in M)(v[r][i][p]) + m >= m*y[j][l][p] - sum(r in M)(v[r][j][p]);    
     }
 }    
 
