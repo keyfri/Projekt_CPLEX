@@ -45,7 +45,7 @@ subject to
 	// 2 ???
 	forall(i in M, p in P){
 		con2: sum(j in M)(x[j][i][p]) + sum(a in {1}: i == S[p])(1) == 
-		      sum(r in M)(x[i][r][p]) + sum(a in {1}: i == D[p])(1);
+		      sum(r in M: r not in S_set[p])(x[i][r][p]) + sum(a in {1}: i == D[p])(1);
 	}	
 	
 //	// 3
