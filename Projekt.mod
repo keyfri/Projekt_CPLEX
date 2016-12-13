@@ -86,6 +86,10 @@ subject to
     forall(p in P){
     	sum(i in M, j in M)(v[i][j][p]) == sum(k in 1..m-1)(k);    
     }
+    
+    forall(i in M, j in M: costs[i][j] == 0){
+    	    sum(p in P)(x[i][j][p]) == 0;
+    }
 }    
 
 
