@@ -52,6 +52,6 @@ K = [
 
 //  order of purchasing a product
 O = [
-	[1, 1],
-	[2, 2]
+	[1, 2],
+	[2, 1]
 ];

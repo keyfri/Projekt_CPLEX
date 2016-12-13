@@ -32,7 +32,7 @@ int q[M][N] = ...;
 int O[N][P] = ...;
 
 dvar int+ x[M][M][P] in 0..1;
-dvar int+ y[M][N][P] in 0..1;
+dvar int+ y[M][N][P];// in 0..1;
 dvar int+ v[M][M][P];
 
 minimize
