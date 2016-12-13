@@ -5,14 +5,14 @@
  *********************************************/
 
 m = 5;
-p = 2;
+p = 1;
 n = 2;
 
-S_set = [{1}, {1}];
-S = [1, 1];
+S_set = [{1}];
+S = [1];
 
-D_set = [{5}, {5}];
-D = [5, 5];
+D_set = [{5}];
+D = [5];
 
 costs = [
 	[0, 2, 2, 0, 0],
@@ -31,11 +31,10 @@ cost_of_purchasing = [
 ];
 
 demands = [
-	[1, 1],
-	[1, 1]
+	[1],
+	[1]
 ];
 
-// quantities of products
 q = [
 	[0, 0],
 	[1, 0],
@@ -44,14 +43,11 @@ q = [
 	[0, 0]
 ];
 
-// set of products which have to be purchased
 K = [
-	{1, 2},
 	{1, 2}
 ];
 
-//  order of purchasing a product
 O = [
-	[1, 1],
-	[2, 2]
+	[1],
+	[2]
 ];

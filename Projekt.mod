@@ -83,13 +83,17 @@ subject to
     	m*(sum(a in M)(x[a][i][p]) - y[i][k][p]) - sum(r in M)(v[r][i][p]) + m >= m*y[j][l][p] - sum(r in M)(v[r][j][p]);    
     }
     
-    forall(p in P){
-    	sum(i in M, j in M)(v[i][j][p]) == sum(k in 1..m-1)(k);    
-    }
+//    forall(p in P){
+//    	sum(i in M, j in M)(v[i][j][p]) == sum(k in 1..m-1)(k);    
+//    }
     
     forall(i in M, j in M: costs[i][j] == 0){
     	    sum(p in P)(x[i][j][p]) == 0;
     }
+    
+//    forall(i in M, l in N: cost_of_purchasing[i][l] == 0){
+//    	    sum(p in P)(y[i][l][p]) == 0;
+//    }
 }    
 
 
