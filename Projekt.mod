@@ -6,7 +6,7 @@
 
 int m = ...;
 int p = ...;
-int n = ...;  //{A,B,C,D}
+int n = ...;  // {A,B,C,D}
 
 range M = 1..m;
 range P = 1..p;
@@ -32,7 +32,7 @@ int q[M][N] = ...;
 int O[N][P] = ...;
 
 dvar int+ x[M][M][P] in 0..1;
-dvar int+ y[M][N][P];// in 0..1;
+dvar int+ y[M][N][P] in 0..1;
 dvar int+ v[M][M][P];
 
 minimize
@@ -44,8 +44,8 @@ subject to
 {
 	// 2 ???
 	forall(i in M, p in P){
-		con2: sum(j in M)(x[j][i][p]) + sum(a in {1}: i == S[p])(1) == 
-		      sum(r in M: r not in S_set[p])(x[i][r][p]) + sum(a in {1}: i == D[p])(1);
+		con2: sum(j in M)(x[j][i][p]) + sum(a in {1}: i in S_set[p])(1) == 
+		      sum(r in M: r not in S_set[p])(x[i][r][p]) + sum(a in {1}: i in D_set[p])(1);
 	}	
 	
 //	// 3
@@ -65,7 +65,11 @@ subject to
 //    
 //    // 6
     forall(i in M, p in P){
-    	con6: sum(j in M)(x[i][j][p]) <= 1;    
+    	con6: sum(j in M)(x[i][j][p]) <= 1;
+    }
+    
+    forall(i in M, p in P, j in M){
+    	con6_2: x[i][j][p] + x[j][i][p] <= 1;
     }
 //    
 //    // 7
@@ -75,7 +79,7 @@ subject to
 //    
 //    // 8
     forall(i in M: i not in D_set[p], p in P){
-    	con8: sum(j in M)(v[j][i][p]) + sum(a in {1}: i==S[p])(m) == sum(j in M)(v[i][j][p] + x[i][j][p]);
+    	con8: sum(j in M)(v[j][i][p]) + sum(a in {1}: i in S_set[p])(m) == sum(j in M)(v[i][j][p] + x[i][j][p]);
     }
 //    
 //    // 9
@@ -83,9 +87,9 @@ subject to
     	m*(sum(a in M)(x[a][i][p]) - y[i][k][p]) - sum(r in M)(v[r][i][p]) + m >= m*y[j][l][p] - sum(r in M)(v[r][j][p]);    
     }
     
-//    forall(p in P){
-//    	sum(i in M, j in M)(v[i][j][p]) == sum(k in 1..m-1)(k);    
-//    }
+    forall(i in M, j in M, p in P){
+    	v[i][j][p] <= m-1;
+    }
     
     forall(i in M, j in M: costs[i][j] == 0){
     	    sum(p in P)(x[i][j][p]) == 0;
