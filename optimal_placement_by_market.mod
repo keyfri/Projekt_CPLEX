@@ -14,17 +14,17 @@ int v[M][M][P] = ...;
 int costs[M][M] = ...;
 int demands[N][P] = ...;
 
+int cost_of_purchasing[M][N] = ...;
+
 {int} S_set[P] = ...;
 int S[P] = ...;
 
 {int} D_set[P] = ...;
 int D[P] = ...;
 
-
 {int} K[P] = ...;
 int O[N][P] = ...;
 
-dvar int+ cost_of_purchasing[M][N];
 dvar int+ q[M][N];
 dvar int+ y[M][N][P] in 0..1;
 
@@ -45,7 +45,6 @@ subject to
     }
     
 
-    
         // instructs that all products should be purchased in the order it has been requested
         // tutaj wywalem d_seta - pewnie trzeba poprawic
     forall(p in P, i in M, j in M: i != j, l in K[p], k in K[p] : l != k && O[l][p] == O[k][p] - 1){

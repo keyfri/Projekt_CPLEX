@@ -20,14 +20,15 @@ costs = [
 	[0, 2, 0]
 ];
 
+
+demands = [
+	[1, 1]
+];
+
 cost_of_purchasing = [
 	[0],
 	[1],
 	[0]
-];
-
-demands = [
-	[1, 1]
 ];
 
 q = [

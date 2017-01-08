@@ -88,17 +88,16 @@ subject to
     	m*(sum(a in M)(x[a][i][p]) - y[i][k][p]) - sum(r in M)(v[r][i][p]) + m >= m*y[j][l][p] - sum(r in M)(v[r][j][p]);    
     }
     
+    
+    // wymuszenie poprawnego liczenia
     forall(i in M, j in M, p in P){
     	v[i][j][p] <= m-1;
     }
     
+    // blokada sciezek w przypadku uzycia
     forall(i in M, j in M: costs[i][j] == 0){
     	    sum(p in P)(x[i][j][p]) == 0;
     }
-    
-//    forall(i in M, l in N: cost_of_purchasing[i][l] == 0){
-//    	    sum(p in P)(y[i][l][p]) == 0;
-//    }
 }    
 
 
