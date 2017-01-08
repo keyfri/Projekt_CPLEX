@@ -1,23 +1,4 @@
 main{
-
-thisOplModel.generate();
-
-	//helper functions
-	function prepareData(source){
-		write("Preparing data for node: ", source);
-		
-		thisOplModel.sources.clear();
-		thisOplModel.sources.add(source);
-		
-		var data = new IloOplDataElements();
-		data.Source = thisOplModel.sources;
-		
-		write("\tDone!\n");
-		return data;
-	};
-	
-	
-	
 	write("Preparing model for optimal placement by path...");
 	var op_by_path_source = new IloOplModelSource("optimal_placement_by_path.mod");
 	var op_by_path_definition = new IloOplModelDefinition(op_by_path_source);
@@ -29,21 +10,69 @@ thisOplModel.generate();
 	var op_by_market_source = new IloOplModelSource("optimal_placement_by_market.mod");
 	var op_by_market_definition = new IloOplModelDefinition(op_by_market_source);
 	var cplex_op_by_market = new IloCplex();
-	var opl_op_by_market = new IloOplModel(op_by_market_definition, cplex_op_by_market);
 	write("\tDone!\n");
 	
 	write("Generating models...");
-	var model_input_data_source = new IloOplDataSource("mini.dat");
-	opl_op_by_path.addDataSource(model_input_data_source);
+	var model_input_data_source = new IloOplDataSource("big.dat");
 	
+	opl_op_by_path.addDataSource(model_input_data_source);
 	opl_op_by_path.generate();
+		
 	write("\tDone!\n");
 
-    if (cplex_op_by_path.solve()){
-    	writeln("OP BY PATH solved!");
-    	writeln(opl_op_by_path.x);
-    	writeln(opl_op_by_path.y);
-    	writeln(opl_op_by_path.v);
-    }	
+    
+    for(var i =0; i<5; i++){
+  		      
+    writeln("ITERATION NUMBER " +i);
 
+            
+    var result;
+    if (cplex_op_by_path.solve()){
+    	result = cplex_op_by_path.getObjValue();
+    	var x =  opl_op_by_path.x;
+    	writeln(result);
+    }	
+    
+		var opl_op_by_market = new IloOplModel(op_by_market_definition, cplex_op_by_market);
+		var data = new IloOplDataElements(); 
+		data.m = opl_op_by_path.m;
+		data.p = opl_op_by_path.p;
+		data.n = opl_op_by_path.n;
+		data.x = opl_op_by_path.x.solutionValue;
+		data.v = opl_op_by_path.v.solutionValue;
+		data.costs = opl_op_by_path.costs;
+		data.demands = opl_op_by_path.demands;
+		data.cost_of_purchasing = opl_op_by_path.cost_of_purchasing;
+		data.S_set = opl_op_by_path.S_set;
+		data.S = opl_op_by_path.S;
+		data.D_set = opl_op_by_path.D_set;
+		data.D = opl_op_by_path.D;
+		data.K = opl_op_by_path.K;
+		data.O = opl_op_by_path.O;
+		opl_op_by_market.addDataSource(data);
+		opl_op_by_market.generate();
+		
+		
+		if (cplex_op_by_market.solve()){
+			writeln(cplex_op_by_market.getObjValue());
+			}		
+				
+		var opl_op_by_path = new IloOplModel(op_by_path_definition, cplex_op_by_path);
+		var data = new IloOplDataElements(); 
+		data.m = opl_op_by_market.m;
+		data.p = opl_op_by_market.p;
+		data.n = opl_op_by_market.n;
+		data.costs = opl_op_by_market.costs;
+		data.demands = opl_op_by_market.demands;
+		data.cost_of_purchasing = opl_op_by_market.cost_of_purchasing;
+		data.q = opl_op_by_market.q.solutionValue;
+		data.S_set = opl_op_by_market.S_set;
+		data.S = opl_op_by_market.S;
+		data.D_set = opl_op_by_market.D_set;
+		data.D = opl_op_by_market.D;
+		data.K = opl_op_by_market.K;
+		data.O = opl_op_by_market.O;
+		opl_op_by_path.addDataSource(data);
+		opl_op_by_path.generate();    
+}
 }
