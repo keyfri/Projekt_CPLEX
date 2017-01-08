@@ -44,7 +44,6 @@ subject to
     	con4: sum(p in P)(y[i][l][p]) - q[i][l] <= 0;
     }
     
-
         // instructs that all products should be purchased in the order it has been requested
         // tutaj wywalem d_seta - pewnie trzeba poprawic
     forall(p in P, i in M, j in M: i != j, l in K[p], k in K[p] : l != k && O[l][p] == O[k][p] - 1){
