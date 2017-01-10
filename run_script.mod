@@ -68,9 +68,13 @@ main{
 	    	
 	    	writeln("Solution q:")
 			for(var m in opl_op_by_market.M){	
-				writeln("Market no. ", m)
-				for(var n in opl_op_by_market.N){	
+				var is_market = 0;
+				for(var n in opl_op_by_market.N){
 					if(opl_op_by_market.q[m][n] > 0){
+						if(!is_market){
+							writeln("Market no. ", m)
+							is_market = 1;					
+						}
 						writeln("Product ", n, ": \t", opl_op_by_market.q[m][n])
 					}
  				}
