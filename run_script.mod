@@ -41,6 +41,18 @@ main{
        				}	    				
      			}	    			    	
 	    	}
+	    	
+	    	writeln("Products:")
+			for(var p in opl_op_by_path.P){
+	    		writeln("Purchaser no. ", p)
+		    	for(var i in opl_op_by_path.y.solutionValue){
+		    		for(var j in opl_op_by_path.y.solutionValue[i]){
+	    				if (opl_op_by_path.y.solutionValue[i][j][p] == 1){
+	    					writeln(j, " in ", i);
+	    				}
+       				}	    				
+     			}	    			    	
+	    	}
 	    }	
 	    
 		var opl_op_by_market = new IloOplModel(op_by_market_definition, cplex_op_by_market);
