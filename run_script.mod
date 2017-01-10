@@ -21,18 +21,28 @@ main{
 	write("\tDone!\n");
 
     
-    for(var i =0; i<5; i++){
+    for(var c=0; c<5; c++){
   		      
-    writeln("ITERATION NUMBER " +i);
-
-            
-    var result;
-    if (cplex_op_by_path.solve()){
-    	result = cplex_op_by_path.getObjValue();
-    	var x =  opl_op_by_path.x;
-    	writeln(result);
-    }	
-    
+	    writeln("========== ITERATION NUMBER " + c, " ==========");
+	
+	            
+	    var result;
+	    if (cplex_op_by_path.solve()){
+	    	writeln("Find path function value:\t\t", cplex_op_by_path.getObjValue());
+	    	
+	    	writeln("Solution x:")
+			for(var p in opl_op_by_path.P){
+	    		writeln("Purchaser no. ", p)
+		    	for(var i in opl_op_by_path.x.solutionValue){
+		    		for(var j in opl_op_by_path.x.solutionValue[i]){
+	    				if (opl_op_by_path.x.solutionValue[i][j][p] == 1){
+	    					writeln(i, "\t -> ", j);
+	    				}
+       				}	    				
+     			}	    			    	
+	    	}
+	    }	
+	    
 		var opl_op_by_market = new IloOplModel(op_by_market_definition, cplex_op_by_market);
 		var data = new IloOplDataElements(); 
 		data.m = opl_op_by_path.m;
@@ -54,8 +64,18 @@ main{
 		
 		
 		if (cplex_op_by_market.solve()){
-			writeln(cplex_op_by_market.getObjValue());
-			}		
+			writeln("Set markets function value:\t\t", cplex_op_by_market.getObjValue());
+	    	
+	    	writeln("Solution q:")
+			for(var m in opl_op_by_market.M){	
+				writeln("Market no. ", m)
+				for(var n in opl_op_by_market.N){	
+					if(opl_op_by_market.q[m][n] > 0){
+						writeln("Product ", n, ": \t", opl_op_by_market.q[m][n])
+					}
+ 				}
+	    	}
+		}		
 				
 		var opl_op_by_path = new IloOplModel(op_by_path_definition, cplex_op_by_path);
 		var data = new IloOplDataElements(); 
@@ -73,6 +93,6 @@ main{
 		data.K = opl_op_by_market.K;
 		data.O = opl_op_by_market.O;
 		opl_op_by_path.addDataSource(data);
-		opl_op_by_path.generate();    
-}
+		opl_op_by_path.generate();
+	}
 }
