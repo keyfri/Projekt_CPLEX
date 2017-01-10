@@ -44,9 +44,16 @@ subject to
     	con4: sum(p in P)(y[i][l][p]) - q[i][l] <= 0;
     }
     
+    
+    // the node should be included in the solution
+    forall(i in M: i not in S_set[p], l in N, p in P){
+    	con5: sum(j in M)(x[i][j][p]) - y[i][l][p] >= 0;    
+    }
+    
+    
         // instructs that all products should be purchased in the order it has been requested
         // tutaj wywalem d_seta - pewnie trzeba poprawic
-    forall(p in P, i in M, j in M: i != j, l in K[p], k in K[p] : l != k && O[l][p] == O[k][p] - 1){
+    forall(p in P, i in M, j in M: j not in D_set[p] && i not in D_set[p] && i != j, l in K[p], k in K[p] : l != k && O[l][p] == O[k][p] - 1){
     	m*(sum(a in M)(x[a][i][p]) - y[i][k][p]) - sum(r in M)(v[r][i][p]) + m >= m*y[j][l][p] - sum(r in M)(v[r][j][p]);    
     }
     

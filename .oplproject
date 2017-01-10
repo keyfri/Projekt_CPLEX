@@ -2,7 +2,19 @@
 	<version>1.0</version>
 	<configs>
 		<config default="true" name="Konfiguracja1" category="opl">
+			<ref name="optimal_placement_by_path.mod" type="model">
+			</ref>
+			<ref name="big_different_sources.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Konfiguracja2" category="opl">
 			<ref name="run_script.mod" type="model">
+			</ref>
+		</config>
+		<config default="false" name="Konfiguracja3" category="opl">
+			<ref name="optimal_placement_by_market.mod" type="model">
+			</ref>
+			<ref name="big_different_sources_by_market.dat" type="data">
 			</ref>
 		</config>
 	</configs>

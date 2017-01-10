@@ -101,12 +101,12 @@ subject to
 }    
 
 
-execute {
-for (p in P){ 
-	for (i in M){
-		for(j in M){	
-			writeln(i, j, p, x[i][j][p], " ", x[i][j][p]*costs[i][j]);
-			}
- 		}			
-	}
-}
+//execute {
+//for (p in P){ 
+//	for (i in M){
+//		for(j in M){	
+//			writeln(i, j, p, x[i][j][p], " ", x[i][j][p]*costs[i][j]);
+//			}
+// 		}			
+//	}
+//}

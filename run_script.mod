@@ -13,7 +13,7 @@ main{
 	write("\tDone!\n");
 	
 	write("Generating models...");
-	var model_input_data_source = new IloOplDataSource("big.dat");
+	var model_input_data_source = new IloOplDataSource("big_different_sources.dat");
 	
 	opl_op_by_path.addDataSource(model_input_data_source);
 	opl_op_by_path.generate();
